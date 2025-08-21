@@ -54,9 +54,9 @@ const getDomain = () =>
           if (!url) return;
           url = parser(url);
           mode = `${mode}`.toLowerCase();
-          if (mode === 'stealth' || mode == 1) goFrame(url);
-          else if (mode === 'window' || mode == 0) location.href = url;
-          else return url;
+          if (mode === 'stealth' || mode == 1) openBlank(url);
+          else if (mode === 'window' || mode == 0) openBlank(url);
+          else openBlank(url);
         }
       : (mode) => {
           mode = `${mode}`.toLowerCase();
