@@ -15,6 +15,23 @@ let uvConfig = {};
 let sjEncode = {};
 // Get the preferred apex domain name. Not exactly apex, as any
 // subdomain other than those listed will be ignored.
+
+function openBlank(url) {
+  const blankWin = window.open('about:blank', '_blank');
+  if (!blankWin) {
+    // fallback: just navigate normally if the pop‑up is blocked
+    window.location.href = url;
+    return;
+  }
+  // build an iframe on the blank page that fills the window
+  blankWin.document.write(
+    '<!doctype html><title>about:blank</title>' +
+    '<iframe src="' + url +
+    '" style="position:fixed;top:0;left:0;width:100%;height:100%;border:0; margin:0;padding:0;"></iframe>'
+  );
+  blankWin.document.close();
+}
+    
 const getDomain = () =>
     location.host.replace(/^(?:www|edu|cooking|beta)\./, ''),
   // This is used for stealth mode when visiting external sites.
